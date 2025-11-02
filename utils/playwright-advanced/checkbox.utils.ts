@@ -3,7 +3,7 @@ import { ActionUtils } from "../playwright-core/Playwright.utils";
 
 export class CheckBoxUtils {
 
-    private actions:ActionUtils
+    private actions:ActionUtils;
     constructor(private page: Page) {
         this.actions = new ActionUtils(page);
     }

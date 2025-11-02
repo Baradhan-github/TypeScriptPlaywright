@@ -2,17 +2,21 @@ import { Locator, Page } from "playwright/test";
 import { Validations } from "../playwright-core/validation.utils";
 import { ActionUtils } from "../playwright-core/Playwright.utils";
 
-export class DropDownUtils{
+export class DropDownUtils {
 
+    // instance
     private validate;
     private playwrightutil;
 
-    constructor(private page:Page){ 
+
+    // constructor
+    constructor(private page: Page) {
         this.validate = new Validations(page);
         this.playwrightutil = new ActionUtils(page);
     }
 
-
+    
+    //methods
     /**
      * Selects the dropdown element
      * @param {Locator} locator - provide the locator of the dropdown element. 
@@ -24,15 +28,15 @@ export class DropDownUtils{
      * label - Label of the dropdown element.
      * @public
      */
-    async selectDropdown(locator:Locator, inputType: "text" | "value" | "label", inputValue:string){
+    async selectDropdown(locator: Locator, inputType: "text" | "value" | "label", inputValue: string) {
         try {
-            switch(inputType){
+            switch (inputType) {
                 case "text":
                     await locator.selectOption(inputValue);
                 case "value":
-                    await locator.selectOption({label:inputValue});
+                    await locator.selectOption({ label: inputValue });
                 case "label":
-                    await locator.selectOption({value:inputValue});
+                    await locator.selectOption({ value: inputValue });
                 default:
                     throw new Error("unsupported inputValue");
             }
@@ -48,7 +52,8 @@ export class DropDownUtils{
      * @param {number} expNumber - provide the expected number of dropdown.
      * @public
      */
-    async countDropdownOptions(locator:Locator, expNumber:number){
+    async countDropdownOptions(locator: Locator, expNumber: number) {
         this.validate.assertToHaveCount(locator, expNumber, true);
     }
+
 }

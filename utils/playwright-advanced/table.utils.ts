@@ -1,11 +1,9 @@
 import { Locator, Page } from "playwright/test";
 
-export class TableUtils{
+export class TableUtils {
 
 
-    constructor(page:Page){  }
-
-    //Static tables
+    constructor(page: Page) { }
 
 
     /**
@@ -14,7 +12,7 @@ export class TableUtils{
      * @returns {Promise<number>} - returns the count as number
      * @public
      */
-    async gettableRow(headerLocator:Locator): Promise<number>{
+    async gettableRow(headerLocator: Locator): Promise<number> {
         const row = headerLocator.locator("tr");
         return await row.count();
     }
@@ -25,10 +23,10 @@ export class TableUtils{
      * @param {Locator} headerLocator - provide the locator of the table.
      * @returns {Promise<string[][]>} - returns the data in an array format
      * @public
-     */    
-    async getAllTableRows(headerLocator:Locator): Promise<string[][]>{
+     */
+    async getAllTableRows(headerLocator: Locator): Promise<string[][]> {
         const row = headerLocator.locator("tr");
-        const rowCount =  await row.count();
+        const rowCount = await row.count();
         const alldata: string[][] = [];
         for (let i = 0; i < rowCount; i++) {
             const allrows = await row.nth(i).locator("td").allInnerTexts();
@@ -44,39 +42,40 @@ export class TableUtils{
      * @param {Locator} rowHeaderLocator - provide the locator of row locator of the required table.
      * @param {string} headerCol - provide the string of a particular header name in the required table.
      * @param {string} headerRow - provide the string of a particular row header name in the required table.
-     * @returns {Promise<string>} - returns the cell data in string format
+     * @returns {Promise<string>} - returns the cell data in format
      * @public
-     */ 
-    async getSpecificCell(headerLocator: Locator, rowHeaderLocator: Locator, headerCol:string, headerRow:string): Promise<string>{
-        let colIndex:number =-1;
-        let rowIndex:number =0;
+     */
+    async getSpecificCell(headerLocator: Locator, rowHeaderLocator: Locator, headerCol: string, headerRow: string): Promise<string> {
+        let colIndex: number = -1;
+        let rowIndex: number = 0;
 
         let repeat = true;
 
         const headerCount = await headerLocator.count();
         const rowCount = await rowHeaderLocator.count();
-        const headerData:string[] = await headerLocator.allInnerTexts();
-        if(headerData.some(i=>i.includes(headerRow))){
-            colIndex = headerData.findIndex(i=>i.includes(headerRow))
-            if(colIndex===-1){
+        const headerData: string[] = await headerLocator.allInnerTexts();
+        if (headerData.some(i => i.includes(headerRow))) {
+            colIndex = headerData.findIndex(i => i.includes(headerRow))
+            if (colIndex === -1) {
                 return `${headerRow} not found`;
             }
         }
-        else{
+        else {
             return `${headerRow} not found`;
         }
 
-        if(repeat){
-            for(let i=0;i<rowCount;i++){
-                const tablerow:string[] = await rowHeaderLocator.nth(i).allInnerTexts();
-                if(tablerow.some(i=>i.includes(headerCol))){
+        if (repeat) {
+            for (let i = 0; i < rowCount; i++) {
+                const tablerow: string[] = await rowHeaderLocator.nth(i).allInnerTexts();
+                if (tablerow.some(i => i.includes(headerCol))) {
                     rowIndex = i;
                     repeat = false;
                 }
             }
         }
-        const finder:string = await rowHeaderLocator.nth(rowIndex).locator("td").nth(colIndex).innerText();
+        const finder: string = await rowHeaderLocator.nth(rowIndex).locator("td").nth(colIndex).innerText();
 
         return finder;
     }
+
 }

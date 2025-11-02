@@ -1,7 +1,10 @@
 import { Locator, Page, expect } from "playwright/test";
+
 export class Validations {
 
+
     constructor(page: Page) { }
+
 
     /**
      * Check whether the element is visible or not
@@ -23,6 +26,7 @@ export class Validations {
 
     }
 
+
     /**
      * Check whether the element is true or not
      * @param {Locator} locator - provide the locator to check whether its true or not. 
@@ -40,8 +44,8 @@ export class Validations {
         else {
             await expect(await locator.textContent()).toBeFalsy();
         }
-
     }
+
 
     /**
      * Check whether the element is enabled or not
@@ -60,8 +64,8 @@ export class Validations {
         else {
             await expect(locator).toBeDisabled();
         }
-
     }
+
 
     /**
      * Check whether the radio is checked or not
@@ -80,8 +84,8 @@ export class Validations {
         else {
             await expect(locator).not.toBeChecked();
         }
-
     }
+
 
     /**
      * Check whether the actual data matches the expected data.
@@ -103,6 +107,7 @@ export class Validations {
         }
     }
 
+
     /**
      * Check whether the actual text matches the expected text.
      * @param {Locator} locator - provide the locator of the text to be checked.
@@ -114,7 +119,7 @@ export class Validations {
      * * false - the condition for selecting actual result should not conatain text.
      * @public
      */
-    async assertToContainText(locator: Locator, expectedText: string, condition: boolean=true) {
+    async assertToContainText(locator: Locator, expectedText: string, condition: boolean = true) {
         if (condition) {
             await expect(locator).toContainText(expectedText);
         }
@@ -122,6 +127,7 @@ export class Validations {
             await expect(locator).not.toContainText(expectedText);
         }
     }
+
 
     /**
      * Check whether the actual text matches the expected text.
@@ -134,7 +140,7 @@ export class Validations {
      * * false - the condition for selecting actual result should not conatain text.
      * @public
      */
-    async assertToHaveText(locator: Locator, expectedText: string, condition: boolean=true) {
+    async assertToHaveText(locator: Locator, expectedText: string, condition: boolean = true) {
         if (condition) {
             await expect(locator).toHaveText(expectedText);
         }
@@ -156,12 +162,12 @@ export class Validations {
      * * false - the condition for selecting attribute does not match the expected value.
      * @public
      */
-    async assertToHaveAttribute(locator: Locator, attribute: string, expectedAttributeValue:string, condition: boolean=true) {
+    async assertToHaveAttribute(locator: Locator, attribute: string, expectedAttributeValue: string, condition: boolean = true) {
         if (condition) {
             await expect(locator).toHaveAttribute(attribute, expectedAttributeValue);
         }
         else {
-            await expect(locator).not.toHaveAttribute(attribute,expectedAttributeValue);
+            await expect(locator).not.toHaveAttribute(attribute, expectedAttributeValue);
         }
     }
 
@@ -177,7 +183,7 @@ export class Validations {
      * * false - the condition for selecting actual value should not conatain expected value.
      * @public
      */
-    async assertToHaveValue(locator: Locator, expectedValue: string, condition: boolean=true) {
+    async assertToHaveValue(locator: Locator, expectedValue: string, condition: boolean = true) {
         if (condition) {
             await expect(locator).toHaveValue(expectedValue);
         }
@@ -198,7 +204,7 @@ export class Validations {
      * * false - the condition for selecting actual class value should not contain expected class value.
      * @public
      */
-    async assertToHaveClass(locator: Locator, expectedClassName: string, condition: boolean=true) {
+    async assertToHaveClass(locator: Locator, expectedClassName: string, condition: boolean = true) {
         if (condition) {
             await expect(locator).toHaveClass(expectedClassName);
         }
@@ -206,6 +212,7 @@ export class Validations {
             await expect(locator).not.toHaveClass(expectedClassName);
         }
     }
+
 
     /**
      * Check whether the element count matches.
@@ -217,7 +224,7 @@ export class Validations {
      * * false - the condition for count should not match.
      * @public
      */
-    async assertToHaveCount(locator: Locator, count:number, condition: boolean=true) {
+    async assertToHaveCount(locator: Locator, count: number, condition: boolean = true) {
         if (condition) {
             await expect(locator).toHaveCount(count);
         }

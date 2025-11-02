@@ -2,9 +2,10 @@ import { Page, Locator } from "playwright";
 import { ActionUtils } from "../utils/playwright-core/Playwright.utils";
 
 export class HomePage {
+
+
     // instance
     private page: Page;
-
     private readonly _userNameField: Locator;
     private readonly _passWordField: Locator;
     private readonly _loginButton: Locator;
@@ -27,6 +28,7 @@ export class HomePage {
         this.actions = new ActionUtils(page);
     }
 
+
     // getters
     get userNameField(): Locator { return this._userNameField; }
     get passWordField(): Locator { return this._passWordField; }
@@ -46,6 +48,7 @@ export class HomePage {
         await this.actions.fillElement(this._userNameField, name)
     }
 
+
     /**
      * Fills in the password fiels with the given input.
      * @param {string} pass - password input from the user.
@@ -54,12 +57,14 @@ export class HomePage {
         await this.actions.fillElement(this._passWordField, pass);
     }
 
+
     /**
      * Clicks the login button
      */
     async clickLoginButton(): Promise<void> {
         await this.actions.clickElement(this._loginButton);
     }
+
 
     /**
      * Clicks the forget password link
@@ -68,12 +73,14 @@ export class HomePage {
         await this.actions.clickElement(this._forgetPasswordLink);
     }
 
+
     /**
      * Clicks the new user link
      */
     async clickNewUserLink(): Promise<void> {
         this.actions.clickElement(this._newUserLink);
     }
+
 
     /**
      * complete method for login process
@@ -85,4 +92,5 @@ export class HomePage {
         await this.setPassword(pass);
         await this.clickLoginButton();
     }
+    
 }

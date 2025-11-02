@@ -2,8 +2,12 @@ import { Locator, Page } from "playwright/test";
 
 export class ActionUtils {
 
+
+    // constructor
     constructor(private page: Page) { }
 
+
+    // methods
     /**
     * This is an utility method helps to click the locator element.
     * @param {Locator} locator - Pass clickable type locator element.
@@ -23,6 +27,7 @@ export class ActionUtils {
             throw error;
         }
     }
+
 
     //===== Text Based ===========
 
@@ -45,6 +50,7 @@ export class ActionUtils {
         }
     }
 
+
     /**
     * This is an utility method helps to get the input value passed in text fields.
     * @param {Locator} locator - Pass locators where text passed inside textfields.
@@ -55,13 +61,14 @@ export class ActionUtils {
     * ```
     * @public
    */
-    async getInputValue(locator: Locator, ): Promise<string> {
+    async getInputValue(locator: Locator,): Promise<string> {
         try {
             return await locator.inputValue();
         } catch (error) {
             throw error;
         }
     }
+
 
     /**
     * This is an utility method helps to get the attribute value in the DOM.
@@ -74,7 +81,7 @@ export class ActionUtils {
     * ```
     * @public
    */
-    async getAttributes(locator: Locator, attribute:string): Promise<string | null> {
+    async getAttributes(locator: Locator, attribute: string): Promise<string | null> {
         try {
             return await locator.getAttribute(attribute);
         }
@@ -82,6 +89,7 @@ export class ActionUtils {
             throw error;
         }
     }
+
 
     /**
     * This is an utility method helps to get the visible text of locator.
@@ -105,6 +113,7 @@ export class ActionUtils {
         }
     }
 
+
     /**
     * This is an utility method helps to get the raw text present in the DOM.
     * @param {Locator} locator - Pass the loctor for which the visible text is required.
@@ -126,6 +135,7 @@ export class ActionUtils {
             throw error;
         }
     }
+
 
     /**
     * This is an utility method helps to get an array of visible text of all the matching elements.
@@ -149,6 +159,7 @@ export class ActionUtils {
         }
     }
 
+
     /**
     * This is an utility method helps to get an array of raw text present in the DOM.
     * @param {Locator} locator - Pass the loctor for which the visible text is required.
@@ -171,6 +182,7 @@ export class ActionUtils {
         }
     }
 
+
     /**
     * This is an utility method helps to get an array of individual locator in the DOM.
     * @param {Locator} locator - Pass the loctor for which has multiple similar locators.
@@ -192,7 +204,5 @@ export class ActionUtils {
             throw error;
         }
     }
-
-   
 
 }

@@ -1,4 +1,7 @@
 import { defineConfig, devices } from '@playwright/test';
+import { ENV_URLS, EnvName } from './config/env.config.ts';
+
+const ENV = (process.env.ENV as EnvName) || 'qa';
 
 export default defineConfig({
   timeout: 10 * 1000,
@@ -12,12 +15,14 @@ export default defineConfig({
   // reporter: [['html',{outputFolder:'.../reports/html-report'}],['allure-playwright',{outputFolder:'.../reports/allure-results'}]],
   reporter:[['html'],['dot'],['line']],
   use: {
+    baseURL: ENV_URLS[ENV],
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',
     viewport:{width:1280,height:720},
     ignoreHTTPSErrors:true,
     permissions: ['geolocation'],
+    headless: false
   },
 
 

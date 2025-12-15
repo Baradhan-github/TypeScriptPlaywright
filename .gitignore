@@ -5,3 +5,10 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
+
+# # local-only scripts
+# scripts/codegen.ts
+
+# # local env files
+# .env
+# .env.local

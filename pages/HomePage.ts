@@ -1,10 +1,8 @@
 import { Page, Locator } from "playwright";
-import { ActionUtils } from "../utils/playwright-core/Playwright.utils";
+import { ActionUtils } from "../utils/playwright.core.util/Playwright.utils";
 
 export class HomePage {
-
-
-    // instance
+    // Private fields
     private page: Page;
     private readonly _userNameField: Locator;
     private readonly _passWordField: Locator;
@@ -12,85 +10,97 @@ export class HomePage {
     private readonly _forgetPasswordLink: Locator;
     private readonly _appLogo: Locator;
     private readonly _newUserLink: Locator;
-    private actions: ActionUtils;
+    private readonly _locationDropdown: Locator;
+    private readonly actions: ActionUtils;
 
-
-    // constructor
+    /**
+     * Constructor for HomePage
+     * @param {Page} page - The Playwright Page object
+     */
     constructor(page: Page) {
         this.page = page;
+        this.actions = new ActionUtils(page);
 
-        this._userNameField = page.locator('table #username');
-        this._passWordField = page.locator('table #password');
+        this._userNameField = page.locator('#username');
+        this._passWordField = page.locator('#password');
         this._loginButton = page.getByRole("button", { name: "Login" });
         this._forgetPasswordLink = page.getByRole('link', { name: "Forgot Password?" });
-        this._newUserLink = page.getByRole('link', { name: 'New User Register Here' })
-        this._appLogo = page.getByAltText("Adactin Group");
-        this.actions = new ActionUtils(page);
+        this._newUserLink = page.getByRole('link', { name: 'New User Register Here' });
+        this._appLogo = page.locator("img.logo[alt='Adactin Group']");
+        this._locationDropdown = page.getByRole('combobox', { name: 'Location' });
     }
 
 
-    // getters
-    get userNameField(): Locator { return this._userNameField; }
-    get passWordField(): Locator { return this._passWordField; }
-    get loginButton(): Locator { return this._loginButton; }
-    get forgetPasswordLink(): Locator { return this._forgetPasswordLink; }
-    get newUserLink(): Locator { return this._newUserLink; }
-    get appLogo(): Locator { return this._appLogo; }
 
-
-    // actions
+    // Getters
+    /**
+     * Gets the app logo locator
+     */
+    get appLogo(): Locator {
+        return this._appLogo;
+    }
 
     /**
-     * Fills in the username field with the given input.
-     * @param {string} name - username input from the user.
+     * Gets the location dropdown locator
      */
-    async setUsername(name: string) {
-        await this.actions.fillElement(this._userNameField, name)
+    get locationDropdown(): Locator {
+        return this._locationDropdown;
     }
 
+
+
+    // Actions
+    /**
+     * Fills in the username field with the given input
+     * @param {string} username - Username input from the user
+     * @returns {Promise<void>}
+     */
+    async setUsername(username: string): Promise<void> {
+        await this.actions.fillElement(this._userNameField, username);
+    }
 
     /**
-     * Fills in the password fiels with the given input.
-     * @param {string} pass - password input from the user.
+     * Fills in the password field with the given input
+     * @param {string} password - Password input from the user
+     * @returns {Promise<void>}
      */
-    async setPassword(pass: string): Promise<void> {
-        await this.actions.fillElement(this._passWordField, pass);
+    async setPassword(password: string): Promise<void> {
+        await this.actions.fillElement(this._passWordField, password);
     }
-
 
     /**
      * Clicks the login button
+     * @returns {Promise<void>}
      */
     async clickLoginButton(): Promise<void> {
         await this.actions.clickElement(this._loginButton);
     }
 
-
     /**
      * Clicks the forget password link
+     * @returns {Promise<void>}
      */
-    async clickForgrtPasswordLink(): Promise<void> {
+    async clickForgotPasswordLink(): Promise<void> {
         await this.actions.clickElement(this._forgetPasswordLink);
     }
 
-
     /**
-     * Clicks the new user link
+     * Clicks the new user registration link
+     * @returns {Promise<void>}
      */
     async clickNewUserLink(): Promise<void> {
-        this.actions.clickElement(this._newUserLink);
+        await this.actions.clickElement(this._newUserLink);
     }
-
 
     /**
-     * complete method for login process
-     * @param {string} name - provide username
-     * @param {string} pass - provide password
+     * Performs the complete login process
+     * @param {string} username - Username for login
+     * @param {string} password - Password for login
+     * @returns {Promise<void>}
      */
-    async loginMethod(name: string, pass: string) {
-        await this.setUsername(name);
-        await this.setPassword(pass);
+    async loginMethod(username: string, password: string): Promise<void> {
+        await this.setUsername(username);
+        await this.setPassword(password);
         await this.clickLoginButton();
     }
-    
 }

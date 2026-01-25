@@ -1,0 +1,12 @@
+{
+    "searchPageData": {
+        "location": "Sydney",
+        "hotel": "Hotel Creek",
+        "roomType": "Standard",
+        "numberOfRooms": "1 - One",
+        "checkInDate": "25/01/2026",
+        "checkOutDate": "27/01/2026",
+        "adultsPerRoom": "2 - Two",
+        "childrenPerRoom": "1 - One"
+    }
+}

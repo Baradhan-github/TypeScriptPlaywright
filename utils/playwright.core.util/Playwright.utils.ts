@@ -1,10 +1,14 @@
 import { Locator, Page } from "playwright/test";
+import { Logger } from "../logger.util/logger";
 
 export class ActionUtils {
 
+    private logger: any;
 
     // constructor
-    constructor(private page: Page) { }
+    constructor(private page: Page) {
+        this.logger = new Logger();
+    }
 
 
     // methods
@@ -21,9 +25,36 @@ export class ActionUtils {
    */
     async clickElement(locator: Locator) {
         try {
+            this.logger.info(`Clicking on element: ${locator}`);
             await locator.click();
+            this.logger.info(`Element clicked`);
         }
         catch (error) {
+            this.logger.error(`Error clicking on element: ${locator}`);
+            throw error;
+        }
+    }
+
+
+    /**
+    * This is an utility method helps to double click the locator element.
+    * @param {Locator} locator - Pass clickable type locator element.
+    * @throws {Error} if element is not clickable or visible.
+    * @example
+    * ```ts
+    * button:Locator = page.locator('locator');
+    * button.click()
+    * ```
+    * @public
+   */
+    async doubleClickElement(locator: Locator) {
+        try {
+            this.logger.info(`Double clicking on element: ${locator}`);
+            await locator.dblclick();
+            this.logger.info(`Element double clicked`);
+        }
+        catch (error) {
+            this.logger.error(`Error double clicking on element: ${locator}`);
             throw error;
         }
     }
@@ -44,8 +75,11 @@ export class ActionUtils {
    */
     async fillElement(locator: Locator, text: string): Promise<void> {
         try {
+            this.logger.info(`Filling text: ${text} into element: ${locator}`);
             await locator.fill(text);
+            this.logger.info(`Text filled successfully`);
         } catch (error) {
+            this.logger.error(`Error filling text text into element: ${locator}`);
             throw error;
         }
     }
@@ -63,8 +97,10 @@ export class ActionUtils {
    */
     async getInputValue(locator: Locator,): Promise<string> {
         try {
+            this.logger.info(`Getting input value from element: ${locator}`);
             return await locator.inputValue();
         } catch (error) {
+            this.logger.error(`Error getting input value from element: ${locator}`);
             throw error;
         }
     }
@@ -83,9 +119,11 @@ export class ActionUtils {
    */
     async getAttributes(locator: Locator, attribute: string): Promise<string | null> {
         try {
+            this.logger.info(`Getting attribute value from element: ${locator}`);
             return await locator.getAttribute(attribute);
         }
         catch (error) {
+            this.logger.error(`Error getting attribute value from element: ${locator}`);
             throw error;
         }
     }
@@ -106,9 +144,11 @@ export class ActionUtils {
    */
     async getInnerText(locator: Locator): Promise<string> {
         try {
+            this.logger.info(`Getting visible text from element: ${locator}`);
             return await locator.innerText();
         }
         catch (error) {
+            this.logger.error(`Error getting visible text from element: ${locator}`);
             throw error;
         }
     }
@@ -129,9 +169,11 @@ export class ActionUtils {
    */
     async getTextContent(locator: Locator): Promise<string | null> {
         try {
+            this.logger.info(`Getting raw text from element: ${locator}`);
             return await locator.textContent();
         }
         catch (error) {
+            this.logger.error(`Error getting raw text from element: ${locator}`);
             throw error;
         }
     }
@@ -152,9 +194,11 @@ export class ActionUtils {
    */
     async getAllInnerText(locator: Locator): Promise<string[]> {
         try {
+            this.logger.info(`Getting array of visible text from elements: ${locator}`);
             return await locator.allInnerTexts();
         }
         catch (error) {
+            this.logger.error(`Error getting array of visible text from elements: ${locator}`);
             throw error;
         }
     }
@@ -175,9 +219,11 @@ export class ActionUtils {
    */
     async getAllTextContent(locator: Locator): Promise<string[]> {
         try {
+            this.logger.info(`Getting array of raw text from elements: ${locator}`);
             return await locator.allTextContents();
         }
         catch (error) {
+            this.logger.error(`Error getting array of raw text from elements: ${locator}`);
             throw error;
         }
     }
@@ -198,9 +244,11 @@ export class ActionUtils {
    */
     async getAllLocators(locator: Locator): Promise<Locator[]> {
         try {
+            this.logger.info(`Getting array of locators from elements: ${locator}`);
             return await locator.all();
         }
         catch (error) {
+            this.logger.error(`Error getting array of locators from elements: ${locator}`);
             throw error;
         }
     }

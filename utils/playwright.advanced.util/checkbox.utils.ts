@@ -1,5 +1,5 @@
 import { Locator, Page } from "playwright/test";
-import { ActionUtils } from "../playwright-core/Playwright.utils";
+import { ActionUtils } from "../playwright.core.util/Playwright.utils";
 
 export class CheckBoxUtils {
 

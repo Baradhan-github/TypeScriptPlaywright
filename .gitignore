@@ -1,14 +1,51 @@
-
-# Playwright
+# ===============================
+# Node / Playwright
+# ===============================
 node_modules/
+coverage/
+
 /test-results/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
 
-# # local-only scripts
-# scripts/codegen.ts
+# ===============================
+# Environment / Secrets
+# ===============================
+.env
+.env.*
+!.env.example
 
-# # local env files
-# .env
-# .env.local
+# ===============================
+# Logs
+# ===============================
+*.log
+logs/
+api-logs/
+
+# ===============================
+# Build & Cache
+# ===============================
+dist/
+build/
+out/
+.cache/
+.npm/
+*.tsbuildinfo
+
+# ===============================
+# OS / Editor
+# ===============================
+.DS_Store
+Thumbs.db
+desktop.ini
+.vscode/
+.idea/
+*.iml
+
+# ===============================
+# Playwright Media
+# ===============================
+**/*.webm
+**/*.zip
+**/*.trace

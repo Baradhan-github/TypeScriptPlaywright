@@ -1,21 +1,21 @@
 import { defineConfig, devices } from '@playwright/test';
-import { ENV_URLS, EnvName } from './config/env.config.ts';
+import { appUrl } from './config/environment';
 
-const ENV = (process.env.ENV as EnvName) || 'qa';
+const baseURL = appUrl;
 
 export default defineConfig({
   timeout: 10 * 1000,
   testDir: './tests',
   fullyParallel: false,
   // retries: process.env.CI ? 2:0,
-  retries: 1,
+  retries: 0,
   // workers: process.env.CI ? 1 : undefined,
   workers: 1,
 
   // reporter: [['html',{outputFolder:'.../reports/html-report'}],['allure-playwright',{outputFolder:'.../reports/allure-results'}]],
-  reporter: [['html'], ['dot'], ['line']],
+  reporter: [['html'], ['allure-playwright'], ['dot'], ['line']],
   use: {
-    baseURL: ENV_URLS[ENV],
+    baseURL: baseURL,
     trace: 'on-first-retry',
     screenshot: 'only-on-failure',
     video: 'retain-on-failure',

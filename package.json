@@ -1,13 +1,20 @@
 {
   "dependencies": {
-    "playwright": "^1.55.0"
+    "allure-commandline": "^2.36.0",
+    "allure-playwright": "^3.4.5",
+    "dotenv": "^17.2.3",
+    "pino": "^10.2.0",
+    "pino-pretty": "^13.1.3",
+    "playwright": "^1.58.0"
   },
   "devDependencies": {
-    "@playwright/test": "^1.55.0",
+    "@playwright/test": "^1.58.0",
     "@types/node": "^24.5.2"
   },
   "scripts": {
     "test": "playwright test",
+    "test:allure": "playwright test && allure generate ./allure-results --clean -o ./allure-report",
+    "allure:report": "allure serve ./allure-results",
     "test:qa": "ENV=qa playwright test",
     "test:dev": "ENV=dev playwright test",
     "test:staging": "ENV=staging playwright test",
